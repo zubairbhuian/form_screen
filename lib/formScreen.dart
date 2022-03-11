@@ -1,6 +1,6 @@
-import 'dart:async';
-
+// ignore: file_names
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_app/variable.dart';
 
 class FormScreen extends StatefulWidget {
@@ -24,10 +24,11 @@ class _FormScreenState extends State<FormScreen> {
             ElevatedButton(
                 onPressed: btnActive == true
                     ? () {
-                        Timer(Duration(seconds: 3), () {
-                          setState(() {
-                            btnActive = false;
-                          });
+                        setState(() {
+                          btnActive = false;
+                          Fluttertoast.showToast(
+                              backgroundColor: apps.toostColor,
+                              msg: "Your request has been submited");
                         });
                       }
                     : null,
