@@ -10,9 +10,29 @@ class FormScreen extends StatefulWidget {
   State<FormScreen> createState() => _FormScreenState();
 }
 
-bool btnActive = true;
-
 class _FormScreenState extends State<FormScreen> {
+  bool btnActive = false;
+  late TextEditingController emailController;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    emailController = TextEditingController();
+    emailController.addListener(() {
+      final btnActive = emailController.text.isNotEmpty;
+      setState(() {
+        this.btnActive = btnActive;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    emailController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,6 +41,11 @@ class _FormScreenState extends State<FormScreen> {
         body: ListView(
           padding: const EdgeInsets.all(16),
           children: [
+            TextField(
+              decoration: InputDecoration(
+                  label: Text("Name"), border: OutlineInputBorder()),
+              controller: emailController,
+            ),
             ElevatedButton(
                 onPressed: btnActive == true
                     ? () {
