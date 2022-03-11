@@ -35,6 +35,8 @@ class _FormScreenState extends State<FormScreen> {
 
   @override
   Widget build(BuildContext context) {
+    const inputDecoration = InputDecoration(
+                  label: Text("Name"), border: OutlineInputBorder());
     return Scaffold(
         appBar: AppBar(title: const Text(apps.appName)),
         backgroundColor: apps.mainColor,
@@ -42,19 +44,17 @@ class _FormScreenState extends State<FormScreen> {
           padding: const EdgeInsets.all(16),
           children: [
             TextField(
-              decoration: InputDecoration(
-                  label: Text("Name"), border: OutlineInputBorder()),
+              decoration: inputDecoration,
               controller: emailController,
             ),
             ElevatedButton(
                 onPressed: btnActive == true
                     ? () {
-                        setState(() {
-                          btnActive = false;
-                          Fluttertoast.showToast(
-                              backgroundColor: apps.toostColor,
-                              msg: "Your request has been submited");
-                        });
+                        btnActive = false;
+                        Fluttertoast.showToast(
+                            backgroundColor: apps.toostColor,
+                            msg: "Your request has been submited");
+                        emailController.clear();
                       }
                     : null,
                 child: const Text("Submit"))

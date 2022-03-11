@@ -17,4 +17,4 @@ samples, guidance on mobile development, and a full API reference.
 "# form_screen"
 
 
-1[](/img/demo.png)
+![](/img/demo.png)
