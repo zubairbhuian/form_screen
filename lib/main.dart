@@ -1,4 +1,6 @@
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,7 +12,29 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  var value = 1;
+  var value = 0;
+  loadValue() async {
+    SharedPreferences pre = await SharedPreferences.getInstance();
+    setState(() {
+      value = pre.getInt("value") ?? 0;
+    });
+  }
+
+  incriment() async {
+    SharedPreferences pre = await SharedPreferences.getInstance();
+    setState(() {
+      value++;
+      pre.setInt("value", value);
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadValue();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,11 +46,7 @@ class _MyAppState extends State<MyApp> {
         body: Center(
             child: ElevatedButton(
                 child: Text("Click $value Times"),
-                onPressed: () {
-                  setState(() {
-                    value++;
-                  });
-                })),
+                onPressed:incriment)),
       )),
     );
   }
