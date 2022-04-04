@@ -54,8 +54,8 @@ class _ListScreenState extends State<ListScreen> {
         future: _todo,
         builder: (BuildContext context, AsyncSnapshot<List<todo>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: const CircularProgressIndicator(),
+            return const Center(
+              child: CircularProgressIndicator(),
             );
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
