@@ -1,28 +1,24 @@
 import 'package:flutter/material.dart';
+import 'dbhelper.dart';
+import 'list.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await DatabaseHandler().initializeDB();
+
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      title: 'todos',
+      theme: ThemeData(
+        primarySwatch: Colors.deepOrange,
+      ),
       debugShowCheckedModeBanner: false,
-      home: SafeArea(child: HomePage()),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text("hi")),
+      home: ListScreen(),
     );
   }
 }
