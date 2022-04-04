@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'add.dart';
 import 'dbhelper.dart';
 import 'model.dart';
@@ -37,30 +38,30 @@ class _ListScreenState extends State<ListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sqlite todos'),
+        title: const Text('Sqlite todos'),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => AddScreen()),
+            MaterialPageRoute(builder: (context) => const AddScreen()),
           );
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         backgroundColor: Colors.deepOrange,
       ),
       body: FutureBuilder<List<todo>>(
         future: _todo,
         builder: (BuildContext context, AsyncSnapshot<List<todo>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return new Center(
-              child: new CircularProgressIndicator(),
+            return Center(
+              child: const CircularProgressIndicator(),
             );
           } else if (snapshot.hasError) {
-            return new Text('Error: ${snapshot.error}');
+            return Text('Error: ${snapshot.error}');
           } else {
             final items = snapshot.data ?? <todo>[];
-            return new Scrollbar(
+            return Scrollbar(
               child: RefreshIndicator(
                 onRefresh: _onRefresh,
                 child: ListView.builder(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'dbhelper.dart';
 import 'list.dart';
 
@@ -6,10 +7,12 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await DatabaseHandler().initializeDB();
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
